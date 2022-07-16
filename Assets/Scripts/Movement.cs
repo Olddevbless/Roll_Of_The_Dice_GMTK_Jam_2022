@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
     float speed = 5f;
     float rayLength = 1.3f;
     public bool canMove= false;
-    public int cubeValue;
+    public int cubeValue = 1;
     GameObject playerDie;
     // Start is called before the first frame update
     void Start()
