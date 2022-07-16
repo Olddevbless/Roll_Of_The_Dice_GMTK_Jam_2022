@@ -15,11 +15,15 @@ public class Movement : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     float speed = 5f;
-    bool canMove;
+    float rayLength = 1.3f;
+    public bool canMove= false;
+    public int cubeValue;
+    GameObject playerDie;
     // Start is called before the first frame update
     void Start()
     {
-       
+        playerDie = GameObject.Find("PlayerDie");
+        currentDir = up;
         nextPos = Vector3.forward;
         destination = transform.position;
     }
@@ -30,41 +34,65 @@ public class Movement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         Moving();
+        
     }
     void Moving()
     {
+        canMove = false;
         transform.position = Vector3.MoveTowards(transform.position, destination, speed*Time.deltaTime);
-        if (horizontalInput>0)
+        if (Input.GetKey(KeyCode.D))
         {
-            nextPos = Vector3.right;
+            nextPos = Vector3.right * cubeValue; 
             currentDir = right;
             canMove = true;
         }
-        if (horizontalInput< 0)
+        if (Input.GetKey(KeyCode.A))
         {
-            nextPos = Vector3.left;
+            nextPos = Vector3.left*cubeValue;
             currentDir = left;
             canMove = true;
         }
-        if (verticalInput>0)
+        if (Input.GetKey(KeyCode.W))
         {
-            nextPos = Vector3.forward;
+            playerDie.transform.Rotate(90, 0, 0);
+            nextPos = Vector3.forward*cubeValue;
             currentDir = up;
             canMove = true;
         }
-        if (verticalInput < 0)
+        if (Input.GetKey(KeyCode.S))
         {
-            nextPos = Vector3.back;
+            nextPos = Vector3.back*cubeValue;
             currentDir = down;
             canMove = true;
         }
-        if (Vector3.Distance(destination, transform.position) <= 0.0001f)
+        if (Vector3.Distance(destination, transform.position) <=0.0001f)
         {
             transform.localEulerAngles = currentDir;
-            if (canMove)
+            if (canMove== true)
             {
-                destination = transform.position + nextPos;
+                if (Valid())
+                {
+                    destination = transform.position + nextPos;
+                    direction = nextPos;
+                    canMove = false;
+                }
             }
+        }
+        bool Valid()
+        {
+            Ray myRay = new Ray(transform.position + (new Vector3(0, 0.3f, 0)), transform.forward);
+            RaycastHit hit;
+            Debug.DrawRay(myRay.origin, myRay.direction, Color.red);
+
+            if (Physics.Raycast(myRay,out hit, rayLength))
+            {
+                if (hit.collider.tag == "Wall")
+                {
+                    Debug.Log("ray hit wall");
+                    return false;
+                }
+            }
+            return true;
         }
     }   
 }
