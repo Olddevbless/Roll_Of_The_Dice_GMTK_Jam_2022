@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class LowerLadder : MonoBehaviour
 {
-    public GameObject blockLadder;
-    public GameObject openLadder;
+    public GameObject[] blockLadders;
+    public GameObject[] openLadders;
+    public GameObject[] trapBlocks;
+    int trapBlocksIndex;
+    int blockLadderIndex;
+    int openLadderIndex;
      void OnCollisionEnter(Collision collision)
     {
-        blockLadder.SetActive(false);
-        openLadder.SetActive(true);
+        trapBlocks[trapBlocksIndex].SetActive(false);
+        blockLadders[blockLadderIndex].SetActive(false);
+        openLadders[openLadderIndex].SetActive(true);
     }
 }
