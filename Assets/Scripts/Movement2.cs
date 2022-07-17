@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Movement2 : MonoBehaviour
 {
     Vector3 nextPos;
@@ -30,6 +30,8 @@ public class Movement2 : MonoBehaviour
             canMove = false;
             Move(Vector3.back);
         }
+        LevelFail();
+        
     }
 
     void Move(Vector3 dir){
@@ -96,5 +98,13 @@ public class Movement2 : MonoBehaviour
             }
         }
         return facesVal[xVal];
+    }
+    void LevelFail()
+    {
+        if (transform.position.y < -5)
+        {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
