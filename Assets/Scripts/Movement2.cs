@@ -173,6 +173,7 @@ public class Movement2 : MonoBehaviour
         }
         if (other.CompareTag("Door")&& keyHeld != true)
         {
+
             Debug.Log("You must find the key!");
         }
         
