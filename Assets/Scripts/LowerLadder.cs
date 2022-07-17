@@ -12,8 +12,14 @@ public class LowerLadder : MonoBehaviour
     int openLadderIndex;
      void OnCollisionEnter(Collision collision)
     {
-        trapBlocks[trapBlocksIndex].SetActive(false);
-        blockLadders[blockLadderIndex].SetActive(false);
-        openLadders[openLadderIndex].SetActive(true);
+        for (int x = 0; x < trapBlocks.Length; x++)
+        {
+            if (x < blockLadders.Length)
+            {
+                blockLadders[x].SetActive(false);
+                openLadders[x].SetActive(true);
+            }
+            trapBlocks[x].SetActive(false);
+        }
     }
 }

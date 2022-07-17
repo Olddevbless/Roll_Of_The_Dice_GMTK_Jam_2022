@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System;
+
 public class Movement2 : MonoBehaviour
 {
     Vector3 nextPos;
@@ -15,9 +18,24 @@ public class Movement2 : MonoBehaviour
     private Vector3 RBack = new Vector3(-90f,0f, 0f);
     private bool canMove = true;
     bool keyHeld = false;
+    public AudioSource playerAudio;
+    public AudioClip keyAudioClip;
+    public AudioClip hopAudioClip;
+    public AudioClip successAudioClip;
+    public GameObject gameManager;
+
+    private void Start()
+    {
+        playerAudio.PlayOneShot(successAudioClip);
+        gameManager = GameObject.FindWithTag("GameManager");
+    }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ReloadLevel();
+        }
         if(Input.GetKeyDown(KeyCode.W) && canMove){
             canMove = false;
             Move(Vector3.forward);
@@ -36,6 +54,7 @@ public class Movement2 : MonoBehaviour
     }
 
     void Move(Vector3 dir){
+        gameManager.GetComponent<GameManager>().MovesMade();
         nextPos = dir;
         faceValue = GetFaceValue(faces);
             destination = transform.position + nextPos;
@@ -54,6 +73,7 @@ public class Movement2 : MonoBehaviour
     {
         for(int x = 0; x < spaces; x++){
             if(Valid(dir)){
+                playerAudio.Play();
                 var startRotation = transform.rotation;
                 Vector3 startpos = transform.position;
                 var endRotation = Quaternion.Euler(degree) * transform.rotation;
@@ -68,6 +88,7 @@ public class Movement2 : MonoBehaviour
                 yield return new WaitForSeconds(.1f);
             }
         }
+        Localize();
         canMove = true;
     }
 
@@ -100,6 +121,10 @@ public class Movement2 : MonoBehaviour
         }
         return facesVal[xVal];
     }
+    void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     void LevelFail()
     {
         if (transform.position.y < -5)
@@ -112,18 +137,30 @@ public class Movement2 : MonoBehaviour
     {
         if (other.CompareTag("Key"))
         {
+            playerAudio.PlayOneShot(keyAudioClip);
             Debug.Log("i have a key");
             keyHeld = true;
             Destroy(other.gameObject);
         }
         if (other.CompareTag("Door") && keyHeld == true)
         {
-
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         if (other.CompareTag("Door")&& keyHeld != true)
         {
             Debug.Log("You must find the key!");
         }
+    }
+    public void Localize()
+    {
+        float localx = (float)Math.Round(transform.position.x * 2, MidpointRounding.AwayFromZero) / 2;
+        float localz = (float)Math.Round(transform.position.z * 2, MidpointRounding.AwayFromZero) / 2;
+        transform.position = new Vector3(localx, 0.45f, localz);
+        var vec = transform.eulerAngles;
+        vec.x = (Mathf.Round(vec.x / 90)) * 90;
+        vec.y = (Mathf.Round(vec.y / 90)) * 90;
+        vec.z = (Mathf.Round(vec.z / 90)) * 90;
+        transform.eulerAngles = vec;
     }
 }

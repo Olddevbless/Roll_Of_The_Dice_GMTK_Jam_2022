@@ -8,6 +8,7 @@ TagManager:
   - Start
   - Key
   - Door
+  - GameManager
   layers:
   - Default
   - TransparentFX
