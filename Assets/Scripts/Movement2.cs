@@ -17,7 +17,7 @@ public class Movement2 : MonoBehaviour
     private Vector3 RForward = new Vector3(90f,0f, 0f);
     private Vector3 RBack = new Vector3(-90f,0f, 0f);
     private bool canMove = true;
-    bool keyHeld = false;
+    public bool keyHeld = false;
     public AudioSource playerAudio;
     public AudioClip keyAudioClip;
     public AudioClip hopAudioClip;
