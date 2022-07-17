@@ -12106,6 +12106,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ladderLong 2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4f65834485778454bad37c13f826b51a, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f65834485778454bad37c13f826b51a, type: 3}
 --- !u!1001 &1437838188
@@ -15210,6 +15214,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4f65834485778454bad37c13f826b51a, type: 3}
       propertyPath: m_Name
       value: ladderLong 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4f65834485778454bad37c13f826b51a, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f65834485778454bad37c13f826b51a, type: 3}
