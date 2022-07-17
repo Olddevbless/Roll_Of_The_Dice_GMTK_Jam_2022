@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -980,11 +980,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 4f65834485778454bad37c13f826b51a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 73a19c7cca3f6574c8c3fe84467fc0db, type: 2}
+      objectReference: {fileID: 2100000, guid: 3f6b8a7179fa73d42aa2bce98830b685, type: 2}
     - target: {fileID: -7511558181221131132, guid: 4f65834485778454bad37c13f826b51a, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 73a19c7cca3f6574c8c3fe84467fc0db, type: 2}
+      objectReference: {fileID: 2100000, guid: 3f6b8a7179fa73d42aa2bce98830b685, type: 2}
     - target: {fileID: 919132149155446097, guid: 4f65834485778454bad37c13f826b51a, type: 3}
       propertyPath: m_Name
       value: OpenLadder2
@@ -1201,7 +1201,7 @@ GameObject:
   - component: {fileID: 195581560}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15703,7 +15703,7 @@ MeshCollider:
   m_GameObject: {fileID: 1917808279}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -17625,6 +17625,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6874977722069390042, guid: c90aa5541377ea64183e4e99d934a707, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f6b8a7179fa73d42aa2bce98830b685, type: 2}
+    - target: {fileID: 6874977722069390042, guid: c90aa5541377ea64183e4e99d934a707, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f6b8a7179fa73d42aa2bce98830b685, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c90aa5541377ea64183e4e99d934a707, type: 3}
 --- !u!1 &5235793496089402343 stripped

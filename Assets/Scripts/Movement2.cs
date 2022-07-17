@@ -49,6 +49,12 @@ public class Movement2 : MonoBehaviour
             canMove = false;
             Move(Vector3.back);
         }
+        else if(Input.GetKeyDown(KeyCode.M)){
+            SceneManager.LoadScene("Menu");
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape)){
+            Application.Quit();
+        }
         LevelFail();
         
     }
@@ -72,7 +78,7 @@ public class Movement2 : MonoBehaviour
     IEnumerator MoveObject(Vector3 destination, float overTime, Vector3 degree, int spaces, Vector3 dir)
     {
         for(int x = 0; x < spaces; x++){
-            if(Valid(dir)){
+            if(Valid(dir)&&OnGround()){
                 playerAudio.Play();
                 var startRotation = transform.rotation;
                 Vector3 startpos = transform.position;
@@ -89,6 +95,7 @@ public class Movement2 : MonoBehaviour
             }
         }
         Localize();
+        OnGround();
         canMove = true;
     }
 
@@ -103,6 +110,23 @@ public class Movement2 : MonoBehaviour
                 if (hit.collider.tag == "Wall")
                 {
                     Debug.Log("ray hit wall");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool OnGround()
+        {
+            Ray myRay = new Ray(transform.position + (new Vector3(0, 0.2f, 0)), Vector3.down);
+            RaycastHit hit;
+            Debug.DrawRay(myRay.origin, myRay.direction, Color.red);
+            if (Physics.Raycast(myRay,out hit, 5f))
+            {
+                if (hit.collider.tag == "Water")
+                {
+                    Debug.Log("Player over water");
+                    gameObject.GetComponent<Rigidbody>().isKinematic = false;
                     return false;
                 }
             }
@@ -150,6 +174,13 @@ public class Movement2 : MonoBehaviour
         if (other.CompareTag("Door")&& keyHeld != true)
         {
             Debug.Log("You must find the key!");
+        }
+        
+    }
+    private void OnCollisionEnter(Collision other) {
+        if (other.transform.gameObject.CompareTag("Water"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
     public void Localize()
