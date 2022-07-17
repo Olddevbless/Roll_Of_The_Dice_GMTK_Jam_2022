@@ -14,6 +14,7 @@ public class Movement2 : MonoBehaviour
     private Vector3 RForward = new Vector3(90f,0f, 0f);
     private Vector3 RBack = new Vector3(-90f,0f, 0f);
     private bool canMove = true;
+    bool keyHeld = false;
 
     void Update()
     {
@@ -105,6 +106,24 @@ public class Movement2 : MonoBehaviour
         {
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Key"))
+        {
+            Debug.Log("i have a key");
+            keyHeld = true;
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Door") && keyHeld == true)
+        {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if (other.CompareTag("Door")&& keyHeld != true)
+        {
+            Debug.Log("You must find the key!");
         }
     }
 }
