@@ -58,7 +58,7 @@ public class Movement2 : MonoBehaviour
                 float startTime = Time.time;
                 while(Time.time < startTime + overTime)
                 {
-                    transform.position = Vector3.Slerp(startpos, destination, (Time.time - startTime)/overTime);
+                    transform.position = Vector3.Lerp(startpos, destination, (Time.time - startTime)/overTime);
                     transform.rotation = Quaternion.Slerp(startRotation, endRotation, (Time.time - startTime)/overTime);
                     yield return null;
                 }
