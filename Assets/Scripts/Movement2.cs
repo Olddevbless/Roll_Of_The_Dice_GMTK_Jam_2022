@@ -168,7 +168,9 @@ public class Movement2 : MonoBehaviour
         }
         if (other.CompareTag("Door") && keyHeld == true)
         {
-            
+            if(SceneManager.GetActiveScene().buildIndex == 5){
+                SceneManager.LoadScene("Menu");
+            }else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         if (other.CompareTag("Door")&& keyHeld != true)
