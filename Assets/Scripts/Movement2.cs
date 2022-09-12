@@ -133,7 +133,7 @@ public class Movement2 : MonoBehaviour
             return true;
         }
 
-    public int GetFaceValue(GameObject[] faces){
+    public int GetFaceValue( GameObject[] faces){
         int[] facesVal = new int[] {1, 2, 3, 4, 5, 6};
         int xVal = 0;
         GameObject highestFace = faces[0];
